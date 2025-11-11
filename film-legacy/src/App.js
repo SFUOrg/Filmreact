@@ -24,7 +24,7 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [loading, setLoading] = useState({ movies: true, users: true, posts: true });
 
-  // 🚨 Legacy: один useEffect на всё — студенты разделят
+  // 🚨 Legacy: один useEffect на всё
   useEffect(() => {
     // 1. Загрузка фильмов через OMDb
     const loadMovies = async () => {
@@ -68,7 +68,7 @@ function App() {
     loadUsersAndPosts();
   }, []);
 
-  // 🔁 Перезагрузка постов при смене фильма (legacy: студенты оптимизируют кэширование)
+  // 🔁 Перезагрузка постов при смене фильма (legacy: кэширование)
   useEffect(() => {
     if (!selectedMovie) return;
 
@@ -77,7 +77,7 @@ function App() {
         const res = await fetch(`${API_BASE}/posts?movieId=${selectedMovie.imdbID}`);
         if (!res.ok) throw new Error('Posts fetch failed');
         const moviePosts = await res.json();
-        // 🚨 Legacy: перезаписываем все посты — студенты сделают мемоизацию
+        // 🚨 Legacy: перезаписываем все посты — мемоизацию
         setPosts(moviePosts);
       } catch (e) {
         console.error('📬 Ошибка загрузки постов:', e);
@@ -172,7 +172,7 @@ function App() {
               )}
             </div>
 
-            {/* 🚨 Legacy: кнопка "Добавить отзыв" — без реализации, для студентов */}
+            {/* 🚨 Legacy: кнопка "Добавить отзыв" — без реализации */}
             <button
               style={{
                 marginTop: '16px',
